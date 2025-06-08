@@ -1,0 +1,152 @@
+import { format } from "date-fns";
+import { ja } from "date-fns/locale";
+import { Loader2 } from "lucide-react";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { chartConfig } from "@/lib/chartConfig";
+import { ErrorState, LoadingState, SelectionRequiredState, NoDataState } from "@/components/EmptyStates";
+import type { Store } from "@/lib/stores";
+
+interface ChartSectionProps {
+  selectedDate: Date;
+  selectedStoreInfo: Store | undefined;
+  selectedPrefecture: string | null;
+  isLoading: boolean;
+  isError: boolean;
+  error: unknown;
+  apiRequest: { shop: string; date: string } | null;
+  chartData: Array<{
+    time: string;
+    male: number;
+    female: number;
+    malePrevWeek?: number;
+    femalePrevWeek?: number;
+  }>;
+}
+
+export function ChartSection({
+  selectedDate,
+  selectedStoreInfo,
+  selectedPrefecture,
+  isLoading,
+  isError,
+  error,
+  apiRequest,
+  chartData,
+}: ChartSectionProps) {
+  return (
+    <Card className="mb-4 sm:mb-6">
+      <CardHeader className="pb-2 sm:pb-3">
+        <CardTitle className="flex items-center justify-center gap-2 text-center">
+          {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+          {selectedStoreInfo 
+            ? `${selectedStoreInfo.name} ${selectedStoreInfo.location}店`
+            : selectedPrefecture 
+              ? "店舗を選択してください"
+              : "都道府県を選択してください"
+          }
+        </CardTitle>
+        <CardDescription className="text-center">
+          {format(selectedDate, "yyyy年MM月dd日", { locale: ja })}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="p-0 min-h-[60vh] sm:min-h-[500px] md:min-h-[600px]">
+        {/* エラー状態 */}
+        {isError && <ErrorState error={error} />}
+
+        {/* ローディング状態 */}
+        {isLoading && !isError && <LoadingState />}
+
+        {/* データ未選択状態 */}
+        {!apiRequest && !isLoading && !isError && <SelectionRequiredState />}
+
+        {/* データが空の場合 */}
+        {chartData.length === 0 && !isLoading && !isError && apiRequest && <NoDataState />}
+
+        {/* チャート表示 */}
+        {chartData.length > 0 && !isLoading && !isError && (
+          <div className="w-full h-[60vh] sm:h-[500px] md:h-[600px] p-2 sm:p-4">
+            <ChartContainer config={chartConfig} className="w-full h-full !aspect-auto">
+              <LineChart
+                accessibilityLayer
+                data={chartData}
+                margin={{
+                  left: -16,
+                  right: 16,
+                  top: 16,
+                  bottom: -16,
+                }}
+              >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="time"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  angle={-45}
+                  textAnchor="end"
+                  height={60}
+                  fontSize={12}
+                />
+                <YAxis
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  fontSize={12}
+                />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Line
+                  dataKey="male"
+                  type="monotone"
+                  stroke="var(--color-male)"
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{
+                    r: 4,
+                    fill: "var(--color-male)",
+                  }}
+                />
+                <Line
+                  dataKey="female"
+                  type="monotone"
+                  stroke="var(--color-female)"
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{
+                    r: 4,
+                    fill: "var(--color-female)",
+                  }}
+                />
+                <Line
+                  dataKey="malePrevWeek"
+                  type="monotone"
+                  stroke="var(--color-malePrevWeek)"
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={false}
+                  activeDot={{
+                    r: 4,
+                    fill: "var(--color-malePrevWeek)",
+                  }}
+                />
+                <Line
+                  dataKey="femalePrevWeek"
+                  type="monotone"
+                  stroke="var(--color-femalePrevWeek)"
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={false}
+                  activeDot={{
+                    r: 4,
+                    fill: "var(--color-femalePrevWeek)",
+                  }}
+                />
+              </LineChart>
+            </ChartContainer>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
