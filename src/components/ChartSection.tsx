@@ -1,3 +1,4 @@
+import * as React from "react";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { Loader2 } from "lucide-react";
@@ -36,9 +37,9 @@ export function ChartSection({
   chartData,
 }: ChartSectionProps) {
   return (
-    <Card className="mb-4 sm:mb-6">
-      <CardHeader className="pb-2 sm:pb-3">
-        <CardTitle className="flex items-center justify-center gap-2 text-center">
+    <Card className="h-full flex flex-col">
+      <CardHeader className="flex-shrink-0 pb-2 sm:pb-3">
+        <CardTitle className="flex items-center justify-center gap-2 text-center text-sm sm:text-base">
           {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
           {selectedStoreInfo 
             ? `${selectedStoreInfo.name} ${selectedStoreInfo.location}店`
@@ -47,11 +48,11 @@ export function ChartSection({
               : "都道府県を選択してください"
           }
         </CardTitle>
-        <CardDescription className="text-center">
+        <CardDescription className="text-center text-xs sm:text-sm">
           {format(selectedDate, "yyyy年MM月dd日", { locale: ja })}
         </CardDescription>
       </CardHeader>
-      <CardContent className="p-0 min-h-[60vh] sm:min-h-[500px] md:min-h-[600px]">
+      <CardContent className="flex-1 overflow-hidden p-0">
         {/* エラー状態 */}
         {isError && <ErrorState error={error} />}
 
@@ -66,7 +67,7 @@ export function ChartSection({
 
         {/* チャート表示 */}
         {chartData.length > 0 && !isLoading && !isError && (
-          <div className="w-full h-[60vh] sm:h-[500px] md:h-[600px] p-2 sm:p-4">
+          <div className="w-full h-full p-2 sm:p-4">
             <ChartContainer config={chartConfig} className="w-full h-full !aspect-auto">
               <LineChart
                 accessibilityLayer

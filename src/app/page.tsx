@@ -55,39 +55,43 @@ export default function Home() {
   }, [visitorData, prevWeekData]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <div className="container mx-auto px-2 py-3 sm:px-4 sm:py-6">
+    <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <div className="h-full flex flex-col">
         {/* ヘッダー */}
-        <div className="mb-4 sm:mb-6 text-center">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1 sm:mb-2">
+        <div className="flex-shrink-0 py-2 sm:py-4 text-center">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100">
             相席カウンター
           </h1>
         </div>
 
         {/* 選択コントロール */}
-        <SelectionControls
-          selectedPrefecture={selectedPrefecture}
-          onPrefectureChange={setSelectedPrefecture}
-          selectedStore={selectedStore}
-          onStoreChange={setSelectedStore}
-          availableStores={availableStores}
-          selectedDate={selectedDate}
-          onDateChange={setSelectedDate}
-          calendarOpen={calendarOpen}
-          onCalendarOpenChange={setCalendarOpen}
-        />
+        <div className="flex-shrink-0 px-2 sm:px-4">
+          <SelectionControls
+            selectedPrefecture={selectedPrefecture}
+            onPrefectureChange={setSelectedPrefecture}
+            selectedStore={selectedStore}
+            onStoreChange={setSelectedStore}
+            availableStores={availableStores}
+            selectedDate={selectedDate}
+            onDateChange={setSelectedDate}
+            calendarOpen={calendarOpen}
+            onCalendarOpenChange={setCalendarOpen}
+          />
+        </div>
 
-        {/* グラフ */}
-        <ChartSection
-          selectedDate={selectedDate}
-          selectedStoreInfo={selectedStoreInfo}
-          selectedPrefecture={selectedPrefecture}
-          isLoading={isLoading}
-          isError={isError}
-          error={error}
-          apiRequest={apiRequest}
-          chartData={chartData}
-        />
+        {/* チャートセクション */}
+        <div className="flex-1 overflow-hidden px-2 sm:px-4 pb-2 sm:pb-4">
+          <ChartSection
+            selectedDate={selectedDate}
+            selectedStoreInfo={selectedStoreInfo}
+            selectedPrefecture={selectedPrefecture}
+            isLoading={isLoading}
+            isError={isError}
+            error={error}
+            apiRequest={apiRequest}
+            chartData={chartData}
+          />
+        </div>
       </div>
     </div>
   );
