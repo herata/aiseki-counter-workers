@@ -21,6 +21,23 @@ export default function Home() {
   const [selectedDate, setSelectedDate] = React.useState<Date>(getDefaultDate());
   const [calendarOpen, setCalendarOpen] = React.useState(false);
 
+  // モバイルブラウザのアドレスバー対応
+  React.useEffect(() => {
+    function setVH() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+    
+    return () => {
+      window.removeEventListener('resize', setVH);
+      window.removeEventListener('orientationchange', setVH);
+    };
+  }, []);
+
   // 都道府県が変更された時に店舗選択をリセット
   React.useEffect(() => {
     setSelectedStore(null);
@@ -55,17 +72,17 @@ export default function Home() {
   }, [visitorData, prevWeekData]);
 
   return (
-    <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className="mobile-screen overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="h-full flex flex-col">
         {/* ヘッダー */}
-        <div className="flex-shrink-0 py-1 sm:py-2 text-center">
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100">
+        <div className="flex-shrink-0 py-1 text-center">
+          <h1 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-100">
             相席カウンター
           </h1>
         </div>
 
         {/* 選択コントロール */}
-        <div className="flex-shrink-0 px-2 sm:px-4 pb-2">
+        <div className="flex-shrink-0 px-2 sm:px-4 pb-1">
           <SelectionControls
             selectedPrefecture={selectedPrefecture}
             onPrefectureChange={setSelectedPrefecture}
@@ -80,7 +97,7 @@ export default function Home() {
         </div>
 
         {/* チャートセクション */}
-        <div className="flex-1 overflow-hidden px-2 sm:px-4 pb-2">
+        <div className="flex-1 overflow-hidden px-2 sm:px-4 pb-1">
           <ChartSection
             selectedDate={selectedDate}
             selectedStoreInfo={selectedStoreInfo}

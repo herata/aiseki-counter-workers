@@ -74,7 +74,7 @@ export function ChartSection({
                 data={chartData}
                 margin={{
                   left: -8,
-                  right: 8,
+                  right: 24,
                   top: 8,
                   bottom: 8,
                 }}
