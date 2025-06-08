@@ -75,7 +75,7 @@ export default function Home() {
     <div className="mobile-screen overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="h-full flex flex-col">
         {/* ヘッダー */}
-        <div className="flex-shrink-0 py-1 text-center">
+        <div className="flex-shrink-0 py-1 text-center m-2">
           <h1 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-slate-100">
             相席カウンター
           </h1>
