@@ -4,6 +4,7 @@
 declare namespace Cloudflare {
 	interface Env {
 		NEXTJS_ENV: string;
+		API_BASE_URL: string;
 		ASSETS: Fetcher;
 	}
 }
