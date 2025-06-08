@@ -67,16 +67,16 @@ export function ChartSection({
 
         {/* チャート表示 */}
         {chartData.length > 0 && !isLoading && !isError && (
-          <div className="w-full h-full p-2 sm:p-4">
+          <div className="w-full h-full p-1 sm:p-2">
             <ChartContainer config={chartConfig} className="w-full h-full !aspect-auto">
               <LineChart
                 accessibilityLayer
                 data={chartData}
                 margin={{
-                  left: -16,
-                  right: 16,
-                  top: 16,
-                  bottom: -16,
+                  left: -8,
+                  right: 8,
+                  top: 8,
+                  bottom: 8,
                 }}
               >
                 <CartesianGrid vertical={false} />

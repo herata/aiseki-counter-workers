@@ -10,7 +10,7 @@ interface EmptyStateProps {
 
 function EmptyState({ icon, title, description, action }: EmptyStateProps) {
   return (
-    <div className="flex items-center justify-center h-[40vh] sm:h-[300px] text-center p-6">
+    <div className="flex items-center justify-center h-full text-center p-6">
       <div className="space-y-3">
         {icon}
         <div>
@@ -50,7 +50,7 @@ export function ErrorState({ error }: { error: unknown }) {
 
 export function LoadingState() {
   return (
-    <div className="flex items-center justify-center h-[40vh] sm:h-[300px]">
+    <div className="flex items-center justify-center h-full">
       <div className="space-y-3 text-center">
         <Loader2 className="h-8 w-8 animate-spin mx-auto text-slate-500" />
         <p className="text-sm text-slate-600 dark:text-slate-400">

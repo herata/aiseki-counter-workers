@@ -58,14 +58,14 @@ export default function Home() {
     <div className="h-screen overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="h-full flex flex-col">
         {/* ヘッダー */}
-        <div className="flex-shrink-0 py-2 sm:py-4 text-center">
+        <div className="flex-shrink-0 py-1 sm:py-2 text-center">
           <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100">
             相席カウンター
           </h1>
         </div>
 
         {/* 選択コントロール */}
-        <div className="flex-shrink-0 px-2 sm:px-4">
+        <div className="flex-shrink-0 px-2 sm:px-4 pb-2">
           <SelectionControls
             selectedPrefecture={selectedPrefecture}
             onPrefectureChange={setSelectedPrefecture}
@@ -80,7 +80,7 @@ export default function Home() {
         </div>
 
         {/* チャートセクション */}
-        <div className="flex-1 overflow-hidden px-2 sm:px-4 pb-2 sm:pb-4">
+        <div className="flex-1 overflow-hidden px-2 sm:px-4 pb-2">
           <ChartSection
             selectedDate={selectedDate}
             selectedStoreInfo={selectedStoreInfo}
