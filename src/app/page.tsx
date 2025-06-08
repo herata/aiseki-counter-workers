@@ -29,11 +29,11 @@ const chartConfig = {
   },
   malePrevWeek: {
     label: "男性（前週）",
-    color: "#2563eb", // 青色
+    color: "#60a5fa", // 薄い青色（blue-400）
   },
   femalePrevWeek: {
     label: "女性（前週）",
-    color: "#dc2626", // 赤色
+    color: "#f87171", // 薄い赤色
   },
 } satisfies import("@/components/ui/chart").ChartConfig;
 
@@ -85,16 +85,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <div className="container mx-auto px-3 py-4 sm:px-4 sm:py-6">
+      <div className="container mx-auto px-2 py-3 sm:px-4 sm:py-6">
         {/* ヘッダー */}
-        <div className="mb-6 sm:mb-8 text-center">
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+        <div className="mb-4 sm:mb-6 text-center">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-1 sm:mb-2">
             相席カウンター
           </h1>
         </div>
 
         {/* 選択コントロール */}
-        <div className="mb-6 sm:mb-8 flex flex-col items-center justify-center gap-3">
+        <div className="mb-4 sm:mb-6 flex flex-col items-center justify-center gap-2 sm:gap-3">
           {/* 都道府県・店舗選択 */}
           <div className="flex items-center gap-3 w-full max-w-md">
             <div className="flex-1">
@@ -148,8 +148,8 @@ export default function Home() {
         </div>
 
         {/* グラフ */}
-        <Card className="mb-6 sm:mb-8">
-          <CardHeader className="pb-3">
+        <Card className="mb-4 sm:mb-6">
+          <CardHeader className="pb-2 sm:pb-3">
             <CardTitle className="flex items-center justify-center gap-2 text-center">
               {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
               {selectedStoreInfo 
@@ -163,10 +163,10 @@ export default function Home() {
               {format(selectedDate, "yyyy年MM月dd日", { locale: ja })}
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-0 min-h-[400px] sm:min-h-[500px] md:min-h-[600px]">
+          <CardContent className="p-0 min-h-[60vh] sm:min-h-[500px] md:min-h-[600px]">
             {/* エラー状態 */}
             {isError && (
-              <div className="flex items-center justify-center h-[300px] text-center p-6">
+              <div className="flex items-center justify-center h-[40vh] sm:h-[300px] text-center p-6">
                 <div className="space-y-3">
                   <AlertCircle className="h-12 w-12 text-red-500 mx-auto" />
                   <div>
@@ -190,7 +190,7 @@ export default function Home() {
 
             {/* ローディング状態 */}
             {isLoading && !isError && (
-              <div className="flex items-center justify-center h-[300px]">
+              <div className="flex items-center justify-center h-[40vh] sm:h-[300px]">
                 <div className="space-y-3 text-center">
                   <Loader2 className="h-8 w-8 animate-spin mx-auto text-slate-500" />
                   <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -202,7 +202,7 @@ export default function Home() {
 
             {/* データ未選択状態 */}
             {!apiRequest && !isLoading && !isError && (
-              <div className="flex items-center justify-center h-[300px]">
+              <div className="flex items-center justify-center h-[40vh] sm:h-[300px]">
                 <div className="space-y-3 text-center">
                   <Store className="h-12 w-12 text-slate-400 mx-auto" />
                   <div>
@@ -219,7 +219,7 @@ export default function Home() {
 
             {/* データが空の場合 */}
             {chartData.length === 0 && !isLoading && !isError && apiRequest && (
-              <div className="flex items-center justify-center h-[300px]">
+              <div className="flex items-center justify-center h-[40vh] sm:h-[300px]">
                 <div className="space-y-3 text-center">
                   <Users className="h-12 w-12 text-slate-400 mx-auto" />
                   <div>
@@ -236,7 +236,7 @@ export default function Home() {
 
             {/* チャート表示 */}
             {chartData.length > 0 && !isLoading && !isError && (
-              <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] p-4">
+              <div className="w-full h-[60vh] sm:h-[500px] md:h-[600px] p-2 sm:p-4">
                 <ChartContainer config={chartConfig} className="w-full h-full !aspect-auto">
                   <LineChart
                     accessibilityLayer
