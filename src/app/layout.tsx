@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Provider from "@/provider/tanstack-provider";
-import { CopilotWrapper } from "@/provider/copilot-wrapper";
 
 export const viewport: Viewport = {
 	width: "device-width",
@@ -60,9 +59,7 @@ export default function RootLayout({
 		<html lang="ja">
 			<body>
 				<Provider>
-					<CopilotWrapper>
-						{children}
-					</CopilotWrapper>
+					{children}
 				</Provider>
 			</body>
 		</html>
