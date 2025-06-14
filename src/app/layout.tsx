@@ -11,16 +11,18 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
 	title: "相席カウンター",
 	description: "期間限定で主要相席系居酒屋の男女別人数推移を公開中",
-	keywords: ["相席カウンター", "来客分析", "ダッシュボード", "レストラン", "データ分析"],
+	keywords: [
+		"相席カウンター",
+		"来客分析",
+		"ダッシュボード",
+		"レストラン",
+		"データ分析",
+	],
 	authors: [{ name: "相席カウンター運営チーム" }],
 	robots: "noindex, nofollow",
 	icons: {
-		icon: [
-			{ url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-		],
-		apple: [
-			{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-		],
+		icon: [{ url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" }],
+		apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
 		other: [
 			{
 				rel: "android-chrome",
@@ -58,9 +60,7 @@ export default function RootLayout({
 	return (
 		<html lang="ja">
 			<body>
-				<Provider>
-					{children}
-				</Provider>
+				<Provider>{children}</Provider>
 			</body>
 		</html>
 	);
