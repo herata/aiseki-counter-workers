@@ -5,6 +5,7 @@ declare namespace Cloudflare {
 	interface Env {
 		NEXTJS_ENV: string;
 		API_BASE_URL: string;
+		GROQ_API_KEY: string;
 		ASSETS: Fetcher;
 	}
 }

@@ -23,7 +23,8 @@
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
 	 */
 	"vars": { 
-		"API_BASE_URL": "https://5ikj3hpnz27cdwpbz2ndrokvyi0aazgl.lambda-url.ap-northeast-1.on.aws"
+		"API_BASE_URL": "https://5ikj3hpnz27cdwpbz2ndrokvyi0aazgl.lambda-url.ap-northeast-1.on.aws",
+		"GROQ_API_KEY": "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"
 	},
 	/**
 	 * Smart Placement

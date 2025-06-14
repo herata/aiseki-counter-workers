@@ -123,20 +123,20 @@
 
 /* モバイル対応の高さ設定 */
 :root {
-	/* モバイルブラウザのアドレスバーを考慮した実際の表示高さ */
-	--vh: 1vh;
+  /* モバイルブラウザのアドレスバーを考慮した実際の表示高さ */
+  --vh: 1vh;
 }
 
 @supports (height: 100dvh) {
-	/* Dynamic Viewport Height が対応している場合 */
-	.mobile-screen {
-		height: 100dvh;
-	}
+  /* Dynamic Viewport Height が対応している場合 */
+  .mobile-screen {
+    height: 100dvh;
+  }
 }
 
 @supports not (height: 100dvh) {
-	/* Dynamic Viewport Height が対応していない場合 */
-	.mobile-screen {
-		height: calc(var(--vh, 1vh) * 100);
-	}
+  /* Dynamic Viewport Height が対応していない場合 */
+  .mobile-screen {
+    height: calc(var(--vh, 1vh) * 100);
+  }
 }
